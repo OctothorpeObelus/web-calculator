@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<!-- Made by Michael Smith. Started 3/2014, abandoned, functional 10/26/2018, finished 10/29/2018 -->
+<!-- Literally a procrastination masterpiece, any world records out there for this? -->
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <title>HTML Calculator</title>
+        <link rel="icon" type="image/png" href="https://dl1.cbsistatic.com/i/r/2017/12/02/680709b9-c9a5-4fb5-be50-f003b717d5f3/thumbnail/32x32/6dfad3d8e2d99a8ae589d9832a4227ec/iconimg119846.png">
+    </head>
+
+    <body>
+        <table id="calculator">
+            <tr>
+                <td colspan="5">
+                    <input readonly type="text" value="0" maxlength=10 id="display"><span style="font-family:DigitalMono;font-size:96px;color:darkgreen;position:relative;transform:transalte(-50%,50%);">8888888888</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="button" onclick="seven()">7</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="eight()">8</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="nine()">9</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="multiply()">x</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="negate()">+/-</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="button" onclick="four()">4</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="five()">5</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="six()">6</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="divide()">÷</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="square()">x²</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="button" onclick="one()">1</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="two()">2</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="three()">3</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="minus()">-</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="squareRoot()">√x</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" id="ac" onclick="clearall()">AC</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="zero()">0</button>
+                </td>
+                <td>
+                    <button type="button" id="button" onclick="decimal()">.</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="plus()">+</button>
+                </td>
+                <td>
+                    <button type="button" id="buttonOp" onclick="equals()">=</button>
+                </td>
+            </tr>
+        </table>
+    </body>
+    <style>
+        @font-face {
+            font-family: DigitalMono;
+            src: url(file:///C:/Users/3084828/Documents/digitalmono.ttf);
+        }
+        
+        #calculator {
+            margin:auto;
+            font-family: Roboto;
+        }
+        
+        #display {
+            background-color: #3e8e44;
+            /* Green */
+            border: none;
+            color: white;
+            width:456px;
+            height:91px;
+            text-align: right;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 96px;
+            box-shadow: 10px 10px 5px #888888;
+            margin:5px;
+            font-family: DigitalMono, Roboto;
+            background-image:url();
+        }
+        #button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 10px 10px 5px #888888;
+            margin:5px;
+        }
+        #button:hover {
+            background-color: #3e8e44;
+            /* Darker Green */
+            border: none;
+            color: #F2F2F2;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 10px 10px 5px #888888;
+            margin:5px;
+        }
+        #button:active {
+            position:relative;
+            background-color: #3e8e44;
+            /* Darker Green */
+            border: none;
+            color: #F2F2F2;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 5px 5px 5px #888888;
+            left:5px;
+            top:5px;
+            margin:5px;
+        }
+        #buttonOp {
+            background-color: #4dc3ff;
+            /* Light Blue */
+            border: none;
+            color: white;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 10px 10px 5px #888888;
+            margin:5px;
+        }
+        #buttonOp:hover {
+            background-color: #0099e6;
+            /* Darker Blue */
+            border: none;
+            color: #F2F2F2;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 10px 10px 5px #888888;
+            margin:5px;
+        }
+        #buttonOp:active {
+            position:relative;
+            background-color: #0099e6;
+            /* Darker Blue */
+            border: none;
+            color: #F2F2F2;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 5px 5px 5px #888888;
+            left:5px;
+            top:5px;
+            margin:5px;
+        }
+        #ac {
+            background-color: #ff3333;
+            /* Bright Red */
+            border: none;
+            color: white;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 10px 10px 5px #888888;
+            margin:5px;
+        }
+        #ac:hover {
+            background-color: #cc0000;
+            /* Darker Red */
+            border: none;
+            color: #F2F2F2;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 10px 10px 5px #888888;
+            margin:5px;
+        }
+        #ac:active {
+            position:relative;
+            background-color: #cc0000;
+            /* Darker Red */
+            border: none;
+            color: #F2F2F2;
+            width:80px;
+            height:100px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 32px;
+            box-shadow: 5px 5px 5px #888888;
+            left:5px;
+            top:5px;
+            margin:5px;
+        }
+    </style>
+
+    <body>
+        <script>
+            var display = document.getElementById('display')
+            display.value = "0";
+
+            var num1 = "";
+            var operator = "";
+            var num2 = "";
+
+            function clearall() {
+                display.value = "0";
+                num1 = "";
+                num2 = "";
+                operator = "";
+            };
+
+            function appendNum(number) {
+                if (operator == "") {
+                    num1 += number
+                    display.value = num1;
+                } else {
+                    num2 += number
+                    display.value = num2;
+                }
+                lencheck();
+            };
+            
+            function one() {appendNum("1")}
+            function two() {appendNum("2")}
+            function three() {appendNum("3")}
+            function four() {appendNum("4")}
+            function five() {appendNum("5")}
+            function six() {appendNum("6")}
+            function seven() {appendNum("7")}
+            function eight() {appendNum("8")}
+            function nine() {appendNum("9")}
+            function zero() {appendNum("0")}
+            
+            function decimal() {
+                if (operator == "") {
+                    for (var i=0;i<num1.length;i++) {
+                        if (num1.charAt(i) == ".") {
+                            alert("Nah fam, you've already got a decimal in this number.");
+                            return;
+                        }
+                    }
+                    num1 += ".";
+                    display.value(num1)
+                } else {
+                    for (var i=0;i<num2.length;i++) {
+                        if (num2.charAt(i) == ".") {
+                            alert("Nah fam");
+                            return;
+                        }
+                    }
+                    num2 += ".";
+                    display.value(num2)
+                }
+            }
+            
+            function minus() {operator = "sub"}
+            function plus() {operator = "add"}
+            function multiply() {operator = "mul"}
+            function divide() {operator = "div"}
+            
+            function equals() {
+                var intNum2 = parseFloat(num2, 10)
+                var intNum1 = parseFloat(num1, 10)
+                switch(operator) {
+                    case "add":
+                        clearall();
+                        display.value = intNum1+intNum2;
+                        break;
+                    case "sub":
+                        clearall();
+                        display.value = intNum1-intNum2;
+                        break;
+                    case "div":
+                        clearall();
+                        display.value = intNum1/intNum2;
+                        break;
+                    case "mul":
+                        clearall();
+                        display.value = intNum1*intNum2;
+                        break;
+                    default:
+                        if (num1 != "") {display.value = num1} else {display.value = "0"}
+                }
+            }
+            
+            function negate() {
+                if (operator == "") {
+                    if (num1.charAt(0) == "-") {
+                        num1 = num1.substring(1);
+                    } else {
+                        num1 = "-" + num1;
+                    }
+                    display.value = num1;
+                } else {
+                    if (num2.charAt(0) == "-") {
+                        num2 = num2.substring(1);
+                    } else {
+                        num2 = "-" + num2;
+                    }
+                    display.value = num2;
+                }
+            }
+            
+            function square() {
+                if (operator == "") {
+                    num1 = Math.pow(parseFloat(num1, 10),2);
+                    display.value = num1;
+                } else {
+                    num2 = Math.pow(parseFloat(num2, 10),2);
+                    display.value = num2;
+                }
+            }
+            
+            function squareRoot() {
+                if (operator == "") {
+                    num1 = Math.pow(parseFloat(num1, 10),0.5);
+                    display.value = num1;
+                } else {
+                    num2 = Math.pow(parseFloat(num2, 10),0.5);
+                    display.value = num2;
+                }
+            }
+            
+            function lencheck() {
+                if (num1.length > 10) { //> document.getElementById('display').maxlength) {
+                    num1 = num1.substring(0, num1.length-1);
+                }
+                if (num2.length > 10) { //length > document.getElementById('display').maxlength) {
+                    num2 = num2.substring(0,num2.length-1);
+                }
+            }
+        </script>
+        <noscript>Your web browser cannot run this widget!</noscript>
+    </body>
+
+</html>
