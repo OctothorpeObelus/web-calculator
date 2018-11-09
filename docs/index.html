@@ -63,7 +63,7 @@
                     <button type="button" id="buttonOp" onclick="minus()">-</button>
                 </td>
                 <td>
-                    <button type="button" id="buttonOp" onclick="squareRoot()">√x</button>
+                    <button type="button" id="buttonOp" onclick="squareRoot()">vx</button>
                 </td>
             </tr>
             <tr>
@@ -346,17 +346,35 @@
                 if (operator == "") {
                     if (num1.charAt(0) == "-") {
                         num1 = num1.substring(1);
+			if (num1 == "") {
+				display.value = "0";
+			} else {
+				display.value = num1;
+			}
                     } else {
                         num1 = "-" + num1;
+			if (num1 == "-") {
+				display.value = "-0";
+			} else {
+				display.value = num1;
+			}
                     }
-                    display.value = num1;
                 } else {
                     if (num2.charAt(0) == "-") {
                         num2 = num2.substring(1);
+			if (num2 == "") {
+				display.value = "0";
+			} else {
+				display.value = num2;
+			}
                     } else {
                         num2 = "-" + num2;
+			if (num2 == "-") {
+				display.value = "-0";
+			} else {
+				display.value = num2;
+			}
                     }
-                    display.value = num2;
                 }
             }
             
